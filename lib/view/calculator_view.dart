@@ -16,41 +16,64 @@ class CalculatorView extends StatelessWidget {
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
+          children: [DisplayView(displayedValue: displayedValue), const ButtonsView(), const Spacer(flex: 1)],
+        ));
+  }
+}
+
+class DisplayView extends StatefulWidget {
+  const DisplayView({
+    super.key,
+    required this.displayedValue,
+  });
+
+  final String displayedValue;
+
+  @override
+  State<DisplayView> createState() => _DisplayViewState();
+}
+
+class _DisplayViewState extends State<DisplayView> {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        flex: 10,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Expanded(
-                flex: 4,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding: ProjectPaddings.rightPadding,
-                      child: TextWidget(
-                        text: displayedValue,
-                        size: ProjectSizes.size3x,
-                      ),
-                    ),
-                    Divider(color: ProjectColors.purple, height: ProjectSizes.size, thickness: 10),
-                  ],
-                )),
-            Expanded(
-              flex: 5,
-              child: Column(
-                children: [
-                  RowWidget(list: CalculatorItems().rowFirst, color: ProjectColors.light, color2: ProjectColors.light),
-                  RowWidget(
-                      list: CalculatorItems().rowSecond, color: ProjectColors.light, color2: ProjectColors.darkTheme),
-                  RowWidget(
-                      list: CalculatorItems().rowThird, color: ProjectColors.light, color2: ProjectColors.darkTheme),
-                  RowWidget(
-                      list: CalculatorItems().rowFourth, color: ProjectColors.purple, color2: ProjectColors.darkTheme),
-                  RowWidget(
-                      list: CalculatorItems().rowFifth, color: ProjectColors.purple, color2: ProjectColors.darkTheme),
-                ],
+            Padding(
+              padding: ProjectPaddings.rightPadding,
+              child: TextWidget(
+                text: widget.displayedValue,
+                size: ProjectSizes.size3x,
               ),
-            )
+            ),
+            Divider(color: ProjectColors.purple, height: ProjectSizes.size, thickness: 5, indent: 20, endIndent: 20),
           ],
         ));
+  }
+}
+
+class ButtonsView extends StatelessWidget {
+  const ButtonsView({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      flex: 20,
+      child: Column(
+        children: [
+          RowWidget(list: CalculatorItems().rowFirst, color: ProjectColors.light, color2: ProjectColors.light),
+          RowWidget(list: CalculatorItems().rowSecond, color: ProjectColors.light, color2: ProjectColors.darkTheme),
+          RowWidget(list: CalculatorItems().rowThird, color: ProjectColors.light, color2: ProjectColors.darkTheme),
+          RowWidget(list: CalculatorItems().rowFourth, color: ProjectColors.purple, color2: ProjectColors.darkTheme),
+          RowWidget(list: CalculatorItems().rowFifth, color: ProjectColors.purple, color2: ProjectColors.darkTheme),
+        ],
+      ),
+    );
   }
 }
 
